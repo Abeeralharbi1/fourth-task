@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html>
+<head></head>
+<body>
+    <button id="startButton">Start Recording</button>
+    <p id="output"></p>
+
+    <script>
+        const output = document.getElementById('output');
+        const startButton = document.getElementById('startButton');
+        const recognition = new webkitSpeechRecognition() || new SpeechRecognition();
+
+        recognition.lang = 'en-US';
+        recognition.interimResults = true;
+
+        startButton.addEventListener('click', () => {
+            recognition.start();
+            output.textContent = 'Listening...';
+        });
+
+        recognition.onresult = function(event) {
+            const transcript = event.results[0][0].transcript;
+            output.textContent = transcript;
+        };
+    </script>
+</body>
+</html>
